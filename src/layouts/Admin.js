@@ -33,7 +33,7 @@ const switchRoutes = (
             }
             return null;
         })}
-        <Redirect from="/admin" to="/admin/dashboard" />
+        <Redirect from='/admin' to='/admin/dashboard' />
     </Switch>
 );
 
@@ -49,6 +49,8 @@ export default function Admin({ ...rest }) {
     const [color, setColor] = React.useState('blue');
     const [fixedClasses, setFixedClasses] = React.useState('dropdown show');
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [myRoute, setmyRoute] = React.useState(window.location.pathname);
+
     const handleImageClick = image => {
         setImage(image);
     };
@@ -66,6 +68,10 @@ export default function Admin({ ...rest }) {
         setMobileOpen(!mobileOpen);
     };
     const getRoute = () => {
+        if (myRoute != window.location.pathname) {
+            setmyRoute(window.location.pathname);
+            console.log(myRoute);
+        }
         return window.location.pathname !== '/admin/maps';
     };
     const resizeFunction = () => {

@@ -7,9 +7,12 @@
     "dependencies": {
         "@material-ui/core": "4.3.2",
         "@material-ui/icons": "4.2.1",
+        "apollo-boost": "^0.4.4",
         "chartist": "0.10.1",
         "classnames": "2.2.6",
-        "history": "4.9.0",
+        "graphql": "^14.5.8",
+        "graphql-tag": "^2.10.1",
+        "history": "^4.9.0",
         "perfect-scrollbar": "1.4.0",
         "prop-types": "15.7.2",
         "react": "16.9.0",
@@ -33,7 +36,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ripupo88/material-dashboard-react"
+        "url": "git+https://github.com/ripupo88/dashboard"
     },
     "keywords": [],
     "author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
