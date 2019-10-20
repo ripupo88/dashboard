@@ -33,7 +33,7 @@ const switchRoutes = (
             }
             return null;
         })}
-        <Redirect from='/admin' to='/admin/dashboard' />
+        <Redirect from="/admin" to="/admin/dashboard" />
     </Switch>
 );
 
@@ -51,19 +51,19 @@ export default function Admin({ ...rest }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [myRoute, setmyRoute] = React.useState(window.location.pathname);
 
-    const handleImageClick = image => {
-        setImage(image);
-    };
-    const handleColorClick = color => {
-        setColor(color);
-    };
-    const handleFixedClick = () => {
-        if (fixedClasses === 'dropdown') {
-            setFixedClasses('dropdown show');
-        } else {
-            setFixedClasses('dropdown');
-        }
-    };
+    // const handleImageClick = image => {
+    //     setImage(image);
+    // };
+    // const handleColorClick = color => {
+    //     setColor(color);
+    // };
+    // const handleFixedClick = () => {
+    //     if (fixedClasses === 'dropdown') {
+    //         setFixedClasses('dropdown show');
+    //     } else {
+    //         setFixedClasses('dropdown');
+    //     }
+    // };
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };

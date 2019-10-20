@@ -1,4 +1,11 @@
+//apollo client
+//apollo client
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
 import React, { useState } from 'react';
+import gql from 'graphql-tag';
+//material UI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,13 +21,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { createBrowserHistory } from 'history';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { resolve } from 'dns';
 const history = createBrowserHistory({ forceRefresh: false });
 
 function Copyright() {
     return (
-        <Typography variant='body2' color='textSecondary' align='center'>
+        <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color='inherit' href='https://material-ui.com/'>
+            <Link color="inherit" href="https://material-ui.com/">
                 Your Website
             </Link>{' '}
             {new Date().getFullYear()}
@@ -28,6 +36,39 @@ function Copyright() {
         </Typography>
     );
 }
+
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+    cache,
+    link: new HttpLink({
+        uri: 'http://localhost:8383/',
+        headers: {
+            authorization: localStorage.getItem('token'),
+            'client-name': 'Space Explorer [web]',
+            'client-version': '1.0.0'
+        }
+    })
+});
+let miclient = (user, pass) => {
+    return new Promise((resolve, reject) => {
+        client
+            .mutate({
+                mutation: gql`
+            mutation {
+                login(username: "${user}", password: "${pass}") {
+                    token
+                    user {
+                            id
+                            correo
+                        }
+                    }
+                }
+                `
+            })
+            .then(result => resolve(result))
+            .catch(error => reject(error));
+    });
+};
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -59,8 +100,8 @@ export default function SignIn() {
 
     const [loged, setLoged] = useState(localStorage.getItem('token') || '');
 
-    let user;
-    let pass;
+    var user;
+    var pass;
 
     let handleChangeMail = e => {
         user = e.target.value;
@@ -69,74 +110,69 @@ export default function SignIn() {
         pass = e.target.value;
     };
 
-    let entrando = e => {
-        e.preventDefault();
-        console.log('dedee', e);
-        setTimeout(() => {
-            localStorage.setItem(
-                'token',
-                'zd7sfg84d85f4v8sdf7v8ad57fv4z57df7874v5'
-            );
-            setLoged(localStorage.getItem('token') || '');
-        }, 1000);
+    let entrando = async e => {
+        // e.preventDefault();
+        let loginUser = await miclient(user, pass);
+        let token = loginUser.data.login.token;
+        localStorage.setItem('token', token);
     };
-    if (loged != '') return <Redirect to='/admin' />;
+    if (loged != '') return <Redirect to="/admin" />;
     return (
-        <Container component='main' maxWidth='xs'>
+        <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component='h1' variant='h5'>
+                <Typography component="h1" variant="h5">
                     {loged}
                 </Typography>
                 <form onSubmit={entrando} className={classes.form} noValidate>
                     <TextField
-                        variant='outlined'
-                        margin='normal'
+                        variant="outlined"
+                        margin="normal"
                         required
                         fullWidth
-                        id='email'
-                        label='Email Address'
-                        name='email'
-                        autoComplete='email'
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
                         autoFocus
                         onChange={handleChangeMail}
                     />
                     <TextField
-                        variant='outlined'
-                        margin='normal'
+                        variant="outlined"
+                        margin="normal"
                         required
                         fullWidth
-                        name='password'
-                        label='Password'
-                        type='password'
-                        id='password'
-                        autoComplete='current-password'
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
                         onChange={handleChangePass}
                     />
                     <FormControlLabel
-                        control={<Checkbox value='remember' color='primary' />}
-                        label='Remember me'
+                        control={<Checkbox value="remember" color="primary" />}
+                        label="Remember me"
                     />
                     <Button
-                        type='submit'
+                        type="submit"
                         fullWidth
-                        variant='contained'
-                        color='primary'
+                        variant="contained"
+                        color="primary"
                         className={classes.submit}
                     >
                         Entrar
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href='#' variant='body2'>
+                            <Link href="#" variant="body2">
                                 Forgot password?
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href='#' variant='body2'>
+                            <Link href="#" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
