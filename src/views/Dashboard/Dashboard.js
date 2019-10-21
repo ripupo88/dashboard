@@ -1,4 +1,5 @@
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
 // react plugin for creating charts
 import ChartistGraph from 'react-chartist';
 // @material-ui/core
@@ -29,8 +30,9 @@ import CardIcon from 'components/Card/CardIcon.js';
 import CardBody from 'components/Card/CardBody.js';
 import CardFooter from 'components/Card/CardFooter.js';
 // Apollo-react
-import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
+
+import moment from 'moment';
 
 import { bugs, website, server } from 'variables/general.js';
 
@@ -46,23 +48,27 @@ const useStyles = makeStyles(styles);
 
 var name = 'name';
 
-const client = new ApolloClient({
-    uri: `http://localhost:8383/`
-});
+const GET_ACTIVES = gql`
+    query {
+        activeUsers {
+            alias
+            entrada
+            empresa
+        }
+    }
+`;
 
-client
-    .query({
-        query: gql`
-            {
-                hello
-            }
-        `
-    })
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-
-function EmpleadosActivos(props) {
+let EmpleadosActivos = () => {
     const classes = useStyles();
+    const { data, loading, error } = useQuery(GET_ACTIVES);
+    if (loading) return <p>CARGANDO</p>;
+    if (error) {
+        console.log('el error', error);
+        return <p>errorcito</p>;
+    }
+    data.activeUsers.map(user => {
+        console.log(user);
+    });
     return (
         <Card>
             <CardHeader color="warning">
@@ -74,18 +80,18 @@ function EmpleadosActivos(props) {
             <CardBody>
                 <Table
                     tableHeaderColor="warning"
-                    tableHead={['ID', 'Name', 'Salary', 'Country']}
-                    tableData={[
-                        ['1', 'Dakota Rice', '$36,738', 'Niger'],
-                        ['2', 'Minerva Hooper', '$23,789', 'Curaçao'],
-                        ['3', 'Sage Rodriguez', '$56,142', 'Netherlands'],
-                        ['4', 'Philip Chaney', '$38,735', 'Korea, South']
-                    ]}
+                    tableHead={['ID', 'Nombre', 'Entrada', 'Empresa']}
+                    tableData={data.activeUsers.map((user, key) => {
+                        let entrada = new moment.unix(
+                            user.entrada / 1000
+                        ).format('H:mm');
+                        return [key + 1, user.alias, entrada, user.empresa];
+                    })}
                 />
             </CardBody>
         </Card>
     );
-}
+};
 
 export default function Dashboard() {
     const classes = useStyles();
