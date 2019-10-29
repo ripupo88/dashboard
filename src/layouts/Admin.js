@@ -25,9 +25,11 @@ const switchRoutes = (
             if (prop.layout === '/admin') {
                 return (
                     <Route
+                        exact
                         path={prop.layout + prop.path}
                         component={prop.component}
                         key={key}
+                        {...(prop.routes !== undefined ? prop.routes : null)}
                     />
                 );
             }
@@ -70,7 +72,6 @@ export default function Admin({ ...rest }) {
     const getRoute = () => {
         if (myRoute != window.location.pathname) {
             setmyRoute(window.location.pathname);
-            console.log(myRoute);
         }
         return window.location.pathname !== '/admin/maps';
     };

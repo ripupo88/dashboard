@@ -14,6 +14,7 @@ import Typography from 'views/Typography/Typography.js';
 import Icons from 'views/Icons/Icons.js';
 import Maps from 'views/Maps/Maps.js';
 import NotificationsPage from 'views/Notifications/Notifications.js';
+import { exact } from 'prop-types';
 
 const dashboardRoutes = [
     {
@@ -39,6 +40,15 @@ const dashboardRoutes = [
         icon: 'content_paste',
         component: Pronto,
         layout: '/admin'
+    },
+    {
+        path: '/empleados/:id',
+        name: 'EmpleadosID',
+        rtlName: 'ملف تعريفي للمستخدم',
+        icon: Person,
+        component: UserProfile,
+        layout: '/admin',
+        visual: false
     }
     // {
     //     path: '/typography',

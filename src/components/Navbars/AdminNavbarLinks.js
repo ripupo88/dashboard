@@ -62,11 +62,11 @@ export default function AdminNavbarLinks() {
         localStorage.removeItem('token');
         setLoged(localStorage.removeItem('token') || '');
     };
-    if (loged == '') return <Redirect to='/login' />;
+    if (loged == '') return <Redirect to="/login" />;
 
     return (
         <div>
-            <div className={classes.searchWrapper}>
+            {/* <div className={classes.searchWrapper}>
                 <CustomInput
                     formControlProps={{
                         className: classes.margin + ' ' + classes.search
@@ -78,19 +78,19 @@ export default function AdminNavbarLinks() {
                         }
                     }}
                 />
-                <Button color='white' aria-label='edit' justIcon round>
+                <Button color="white" aria-label="edit" justIcon round>
                     <Search />
                 </Button>
-            </div>
+            </div> */}
             <Button
                 color={window.innerWidth > 959 ? 'transparent' : 'white'}
                 justIcon={window.innerWidth > 959}
                 simple={!(window.innerWidth > 959)}
-                aria-label='Dashboard'
+                aria-label="Dashboard"
                 className={classes.buttonLink}
             >
                 <Dashboard className={classes.icons} />
-                <Hidden mdUp implementation='css'>
+                <Hidden mdUp implementation="css">
                     <p className={classes.linkText}>Dashboard</p>
                 </Hidden>
             </Button>
@@ -102,13 +102,13 @@ export default function AdminNavbarLinks() {
                     aria-owns={
                         openNotification ? 'notification-menu-list-grow' : null
                     }
-                    aria-haspopup='true'
+                    aria-haspopup="true"
                     onClick={handleClickNotification}
                     className={classes.buttonLink}
                 >
                     <Notifications className={classes.icons} />
                     <span className={classes.notifications}>5</span>
-                    <Hidden mdUp implementation='css'>
+                    <Hidden mdUp implementation="css">
                         <p
                             onClick={handleCloseNotification}
                             className={classes.linkText}
@@ -133,7 +133,7 @@ export default function AdminNavbarLinks() {
                     {({ TransitionProps, placement }) => (
                         <Grow
                             {...TransitionProps}
-                            id='notification-menu-list-grow'
+                            id="notification-menu-list-grow"
                             style={{
                                 transformOrigin:
                                     placement === 'bottom'
@@ -145,7 +145,7 @@ export default function AdminNavbarLinks() {
                                 <ClickAwayListener
                                     onClickAway={handleCloseNotification}
                                 >
-                                    <MenuList role='menu'>
+                                    <MenuList role="menu">
                                         <MenuItem
                                             onClick={handleCloseNotification}
                                             className={classes.dropdownItem}
@@ -189,12 +189,12 @@ export default function AdminNavbarLinks() {
                     justIcon={window.innerWidth > 959}
                     simple={!(window.innerWidth > 959)}
                     aria-owns={openProfile ? 'profile-menu-list-grow' : null}
-                    aria-haspopup='true'
+                    aria-haspopup="true"
                     onClick={handleClickProfile}
                     className={classes.buttonLink}
                 >
                     <Person className={classes.icons} />
-                    <Hidden mdUp implementation='css'>
+                    <Hidden mdUp implementation="css">
                         <p className={classes.linkText}>Profile</p>
                     </Hidden>
                 </Button>
@@ -212,7 +212,7 @@ export default function AdminNavbarLinks() {
                     {({ TransitionProps, placement }) => (
                         <Grow
                             {...TransitionProps}
-                            id='profile-menu-list-grow'
+                            id="profile-menu-list-grow"
                             style={{
                                 transformOrigin:
                                     placement === 'bottom'
@@ -224,7 +224,7 @@ export default function AdminNavbarLinks() {
                                 <ClickAwayListener
                                     onClickAway={handleCloseProfile}
                                 >
-                                    <MenuList role='menu'>
+                                    <MenuList role="menu">
                                         <MenuItem
                                             onClick={navPerfil}
                                             className={classes.dropdownItem}
