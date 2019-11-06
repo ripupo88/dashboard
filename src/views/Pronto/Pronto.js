@@ -7,6 +7,7 @@ import Warning from '@material-ui/icons/Warning';
 import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
 // core components
 import GridItem from 'components/Grid/GridItem.js';
+import Button from '@material-ui/core/Button';
 import GridContainer from 'components/Grid/GridContainer.js';
 import Danger from 'components/Typography/Danger.js';
 import Card from 'components/Card/Card.js';
@@ -34,6 +35,29 @@ export default function Pronto() {
                             </CardIcon>
                             <p className={classes.cardCategory}>Horario</p>
                             <h3 className={classes.cardTitle}>Proximamente</h3>
+                            <div>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    Cajasiete
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    Start
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    Go
+                                </Button>
+                            </div>
                         </CardHeader>
                         <CardFooter stats>
                             <div className={classes.stats}>
