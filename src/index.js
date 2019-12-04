@@ -11,7 +11,7 @@ import login from 'layouts/login.js';
 import 'assets/css/material-dashboard-react.css?v=1.8.0';
 
 const client = new ApolloClient({
-    uri: `http://localhost:8383/`,
+    uri: `http://192.168.43.174:8383/`,
     headers: {
         authorization: 'Bearer ' + localStorage.getItem('token')
     }

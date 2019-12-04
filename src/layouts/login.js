@@ -41,7 +41,7 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
     cache,
     link: new HttpLink({
-        uri: 'http://localhost:8383/',
+        uri: 'http://192.168.43.174:8383/',
         headers: {
             authorization: localStorage.getItem('token'),
             'client-name': 'Space Explorer [web]',

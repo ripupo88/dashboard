@@ -115,7 +115,7 @@ export default function Sidebar(props) {
     var brand = (
         <div className={classes.logo}>
             <a
-                href="http://localhost:3000/admin/dashboard"
+                href="http://192.168.43.174:3000/admin/dashboard"
                 className={classNames(classes.logoLink, {
                     [classes.logoLinkRTL]: props.rtlActive
                 })}
