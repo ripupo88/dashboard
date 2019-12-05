@@ -9,6 +9,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import Navbar from 'components/Navbars/Navbar.js';
 import Footer from 'components/Footer/Footer.js';
 import Sidebar from 'components/Sidebar/Sidebar.js';
+//appbar
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import Person from '@material-ui/icons/Person';
+
+import GridItem from 'components/Grid/GridItem.js';
+import GridContainer from 'components/Grid/GridContainer.js';
 
 import routes from 'routes.js';
 
@@ -126,6 +137,36 @@ export default function Admin({ ...rest }) {
                 )}
                 {getRoute() ? <Footer /> : null}
             </div>
+            <AppBar position="fixed" color="primary" className={classes.appBar}>
+                <Toolbar>
+                    <GridContainer>
+                        <GridItem xs={3} sm={3} md={3}>
+                            <IconButton
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        </GridItem>
+                        <GridItem xs={3} sm={3} md={3}>
+                            <IconButton color="inherit">
+                                <SearchIcon />
+                            </IconButton>
+                        </GridItem>
+                        <GridItem xs={3} sm={3} md={3}>
+                            <IconButton color="inherit">
+                                <Person />
+                            </IconButton>
+                        </GridItem>
+                        <GridItem xs={3} sm={3} md={3}>
+                            <IconButton edge="end" color="inherit">
+                                <MoreIcon />
+                            </IconButton>
+                        </GridItem>
+                    </GridContainer>
+                </Toolbar>
+            </AppBar>
         </div>
     );
 }
